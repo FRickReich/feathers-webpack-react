@@ -47,7 +47,7 @@ app.configure(middleware);
 // Set up our services (see `services/index.js`)
 app.configure(services);
 // Configure a middleware for 404s and the error handler
-//app.use(notFound());
+app.use(express.notFound());
 app.use(handler());
 
 app.hooks(appHooks);
