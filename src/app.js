@@ -22,6 +22,10 @@ const services = require('./services');
 const appHooks = require('./app.hooks');
 const webpackConfig = require('../webpack.config');
 
+const mongoose = require('./mongoose');
+
+const authentication = require('./authentication');
+
 const app = express(feathers());
 const compiler = webpack(webpackConfig);
 
@@ -42,8 +46,11 @@ app.use('/', express.static(app.get('public')));
 app.configure(rest());
 app.configure(socketio());
 
+app.configure(mongoose);
+
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
+app.configure(authentication);
 // Set up our services (see `services/index.js`)
 app.configure(services);
 // Configure a middleware for 404s and the error handler
